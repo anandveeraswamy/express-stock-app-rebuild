@@ -1,6 +1,30 @@
 html
-  head    
-    title Stock Control System
-    link(rel='stylesheet', href='/styles.css')
-  body
-    h1 Stock Inventory
+    head    
+        title Stock Control System
+        link(rel='stylesheet' href='/styles.css')
+    body
+        h1 Stock Inventory
+
+    //- Display products
+    table
+      thead
+        tr
+          th ID
+          th Name
+          th Price
+          th Quantity
+          th Type
+          th Actions
+      tbody
+        each product in products
+          tr
+            td= product.id
+            td= product.name
+            td= product.price
+            td= product.quantity
+            td= product.type 
+            td
+              a(href=`/details/${product.id}`) View Details
+              form(action=`/delete/${product.id}` method="post" style="display:inline;")
+                input(type="hidden" name="_method" value="DELETE")
+                button(type="submit") Delete

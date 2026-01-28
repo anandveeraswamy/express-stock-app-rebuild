@@ -1,7 +1,9 @@
-const products = {};
+const db = require("../models");
+const Product = db.Product;
 
 exports.index = async (req, res) => {
   try {
+    const products = await Product.findAll();
     res.render("index", { products: products });
   } catch (err) {
     console.error(err);
