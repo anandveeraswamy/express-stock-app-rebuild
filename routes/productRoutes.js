@@ -4,4 +4,6 @@ const stockController = require("../controllers/stockController");
 
 router.get("/", stockController.index);
 
+router.get("/details/:id", stockController.getDetails);
+
 module.exports = router;
