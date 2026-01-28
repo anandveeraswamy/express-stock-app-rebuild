@@ -6,4 +6,10 @@ router.get("/", stockController.index);
 
 router.get("/details/:id", stockController.getDetails);
 
+// GET search products
+router.get('/search', stockController.search);
+
+// GET sort products
+router.get('/sort', stockController.sort);
+
 module.exports = router;

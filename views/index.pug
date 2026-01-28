@@ -5,6 +5,17 @@ html
     body
         h1 Stock Inventory
 
+    //- Search form
+    form(action="/search" method="get")
+      input(type="text" name="query" placeholder="Search products" value=searchQuery)
+      button(type="submit") Search
+
+    //- Sort options
+    form(action="/sort" method="get")
+      select(name="sortBy" onchange="this.form.submit()")
+        option(value="name" selected=sortBy === 'name') Sort by Name
+        option(value="price" selected=sortBy === 'price') Sort by Price
+
     //- Display products
     table
       thead
