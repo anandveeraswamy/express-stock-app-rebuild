@@ -1,5 +1,7 @@
 const db = require("../models");
 const Product = db.Product;
+const Clothing = db.Clothing;
+const Electronic = db.Electronic;
 const { Op } = require('sequelize');
 
 exports.index = async (req, res) => {
@@ -15,7 +17,12 @@ exports.index = async (req, res) => {
 exports.getDetails = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findByPk(id);
+    const product = await Product.findByPk(id, {
+      include: [
+        { model: Clothing, required: false },
+        { model: Electronic, required: false }
+      ]
+    });
 
     if (!product) {
       return res.status(404).send("Product not found.");
