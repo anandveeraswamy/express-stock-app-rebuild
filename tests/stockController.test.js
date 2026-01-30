@@ -1,8 +1,16 @@
+const request = require('supertest');
 const stockController = require('../controllers/stockController');
 const db = require('../models');
+const app = require('../app');
+
+// Jest hook to run before all tests
+beforeAll(async () => {
+  // Sync the database and force true to drop existing tables
+  await db.sequelize.sync({ force: true });
+});
 
 describe('Stock Controller', () => {
-  // Unit Tests
+  //Unit Tests
   describe('Unit Tests', () => {
     test('Create a new product', async () => {
       // Mocking the request and response objects
@@ -35,4 +43,39 @@ describe('Stock Controller', () => {
     // More unit tests...
   });
 
+  // Integration Tests
+  describe('Integration Tests', () => {
+    test('Create a product and retrieve it', async () => {
+      // Using supertest to simulate HTTP requests
+      // This tests the entire request-response cycle, including routing
+      const newProduct = {
+        id: 'INT001',
+        name: 'Integration Test Product',
+        price: 19.99,
+        quantity: 50,
+        type: 'electronic'
+      };
+
+      await request(app)
+        .post('/create')
+        .send(newProduct)
+        .expect(302); // Expecting a redirect status code
+
+      const response = await request(app)
+        .get('/')
+        .expect(200);
+
+      // Checking the response body for the created product
+      expect(response.text).toContain('Integration Test Product');
+    });
+
+    // More integration tests...
+  });
+
 })
+
+// Jest hook to run after all tests
+afterAll(async () => {
+  // Close the database connection
+  await db.sequelize.close();
+});
