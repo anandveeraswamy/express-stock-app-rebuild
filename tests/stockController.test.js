@@ -72,7 +72,28 @@ describe('Stock Controller', () => {
     // More integration tests...
   });
 
-})
+  // Edge Cases and Robust Testing Suggestions
+  describe('Edge Cases and Robust Testing', () => {
+    test('Create a product with invalid data', async () => {
+      // Testing error handling and validation
+      const invalidProduct = {
+        id: 'INVALID001',
+        name: 'Invalid Product',
+        // Missing required fields: price, quantity, type
+      };
+
+      const response = await request(app)
+        .post('/create')
+        .send(invalidProduct)
+        .expect(500); // Expecting an error status code
+
+      expect(response.text).toContain('Error creating product');
+    });
+
+    // More edge case tests...
+  });  
+
+});
 
 // Jest hook to run after all tests
 afterAll(async () => {
