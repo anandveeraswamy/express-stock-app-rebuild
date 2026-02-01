@@ -62,7 +62,7 @@ This is a stock management system built with Node.js and Express that allows use
 
 ## Development Guide
 
-For detailed step-by-step instructions on how this application was developed, please refer to the [Development Guide](DEVELOPMENT_GUIDE.md).
+For detailed step-by-step instructions on how this application was developed, please refer to [Step-by-Step-Instructions.docx](Step-by-Step-Instructions.docx).
 
 ## Extension Opportunities
 
