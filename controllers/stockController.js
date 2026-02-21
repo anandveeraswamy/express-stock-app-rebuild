@@ -1,6 +1,8 @@
 const db = require("../models");
 const Product = db.Product;
-const { Op } = require('sequelize');
+const Clothing = db.Clothing;
+const Electronic = db.Electronic;
+const { Op } = require("sequelize");
 
 exports.index = async (req, res) => {
   try {
@@ -15,7 +17,12 @@ exports.index = async (req, res) => {
 exports.getDetails = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findByPk(id);
+    const product = await Product.findByPk(id, {
+      include: [
+        { model: Clothing, required: false },
+        { model: Electronic, required: false },
+      ],
+    });
 
     if (!product) {
       return res.status(404).send("Product not found.");
@@ -66,11 +73,15 @@ exports.create = async (req, res) => {
 
     // Create a new product in the database
     const product = await Product.create({
-      id, name, price, quantity, type
-    });   
+      id,
+      name,
+      price,
+      quantity,
+      type,
+    });
 
     // Redirect to the home page after successful creation
-    res.redirect('/');
+    res.redirect("/");
   } catch (err) {
     console.error(err);
     res.status(500).send("Error creating product.");
