@@ -1,3 +1,11 @@
+**EDUCATIONAL REPOSITORY - FOR LEARNING PURPOSES ONLY**
+
+This repository is designed to teach students how the assignment repository was built. It is meant for students to build, experiment with, and understand the core concepts of Express.js and how the assignment was constructed.
+
+**⚠️ IMPORTANT:** Do not use this repository for your actual assignment submission. You should instead use the GitHub Classroom repository assigned to you for your coursework.
+
+---
+
 # Express Stock App
 
 A Node.js Express application for managing product inventory including clothing and electronics.
